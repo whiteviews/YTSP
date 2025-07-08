@@ -32,7 +32,7 @@ pip install --upgrade flask spotipy yt-dlp
 ```
 - **Termux**  
 ```bash
-pkg install pyhton ffmpeg git
+pkg install python ffmpeg git
 pip install --upgrade flask spotipy yt-dlp
 ```
 ### Installation  
