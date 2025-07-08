@@ -1,0 +1,233 @@
+/* Save this as static/style.css */
+:root {
+    --bg-color: #121212;
+    --surface-color: #1e1e1e;
+    --primary-color: #bb86fc;
+    --primary-variant: #3700b3;
+    --secondary-color: #03dac6;
+    --text-color: #e1e1e1;
+    --text-muted: #888;
+    --border-color: #333;
+    --error-color: #cf6679;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+#download-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#url-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: var(--surface-color);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    transition: border-color 0.3s ease;
+}
+
+#url-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.options-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    background-color: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.option-group label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+select {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.toggle-group {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-color);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #3a3a3a;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+.slider.round {
+    border-radius: 34px;
+}
+.slider.round:before {
+    border-radius: 50%;
+}
+
+button[type="submit"] {
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: var(--primary-variant);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+    background-color: var(--primary-color);
+}
+
+button[type="submit"]:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+#status-area {
+    margin-top: 2rem;
+    text-align: center;
+    min-height: 80px;
+}
+
+#status-message {
+    color: var(--text-muted);
+    word-wrap: break-word;
+}
+
+#status-message.error {
+    color: var(--error-color);
+}
+
+#download-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--secondary-color);
+    color: var(--bg-color);
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+#download-link:hover {
+    transform: scale(1.05);
+}
+
+.hidden {
+    display: none !important;
+}
+
+#loader {
+    margin: 0 auto;
+    border: 5px solid var(--surface-color);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
