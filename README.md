@@ -25,14 +25,24 @@ This lets you access the site from your other devices
 
 ### Requirements
 Run these commands to install the requirements:
-- **Linux**  
+- **Linux**
+
+First:
 ```bash
 sudo apt install ffmpeg python3 git
-pip install --upgrade flask spotipy yt-dlp
 ```
-- **Termux**  
+Second:
+```bash
+ pip install --upgrade flask spotipy yt-dlp  
+```
+- **Termux**
+
+First:
 ```bash
 pkg install python ffmpeg git
+```
+Second:
+```bash
 pip install --upgrade flask spotipy yt-dlp
 ```
 ### Installation  
