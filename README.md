@@ -18,6 +18,10 @@ Lets you pick Format, Audio quality, If to Embed Metadata and If to Embed Thumbn
 If a spotify link is entered, it will download the audio files from Youtube, only fetching the name of the music from spotify
 - **Playlist Support**  
 Playlists will be inserted in a zip
+- **Search Function**  
+Search up videos or songs using the toggle within the search bar (also including a settings button and search button)
+- **Files Tab**  
+View all the files processed by your "server", pressing the 3 dots from the wanted file brings up 2 options: Download, Delete
 - **Download Button**  
 This is pretty self explanatory, download button to retrieve your files after the program processes them
 - **Runs on your device's local ip**  
