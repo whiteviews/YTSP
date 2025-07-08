@@ -4,109 +4,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sleek YT Downloader</title>
+    <title>YTSP</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>YTSP - WHITEVS</h1>
-            <p>Paste a YouTube or Spotify link to begin.</p>
+            <div class="logo">YTSP</div>
+            <nav class="tabs">
+                <button class="tab-button active" data-view="downloader-view">Downloader</button>
+                <button class="tab-button" data-view="search-view">Search</button>
+                <button class="tab-button" data-view="files-view">Files</button>
+            </nav>
         </header>
-
         <main>
-            <form id="download-form">
-                <input type="text" id="url-input" placeholder="https://open.spotify.com/track/..." autocomplete="off">
-                
-                <div id="options-container">
-                    <!-- YouTube Music & Spotify Options (hidden by default) -->
-                    <div id="music-options" class="options-panel hidden">
-                        <div class="option-group">
-                            <label for="music-format">Format</label>
-                            <select id="music-format">
-                                <option value="flac">FLAC</option>
-                                <option value="mp3">MP3</option>
-                                <option value="m4a">M4A</option>
-                                <option value="wav">WAV</option>
-                                <option value="opus">Opus</option>
-                            </select>
-                        </div>
-                        <div class="option-group">
-                            <label for="audio-quality">Audio Quality</label>
-                            <select id="audio-quality">
-                                <option value="0">0 (Best)</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5 (Default)</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9 (Worst)</option>
-                            </select>
-                        </div>
-                        <div class="option-group toggle-group">
-                            <label for="metadata-toggle" class="toggle-label">Embed Metadata</label>
-                            <label class="switch">
-                                <input type="checkbox" id="metadata-toggle" checked>
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                         <div class="option-group toggle-group">
-                            <label for="thumbnail-toggle" class="toggle-label">Embed Thumbnail</label>
-                            <label class="switch">
-                                <input type="checkbox" id="thumbnail-toggle" checked>
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
+            <!-- Downloader View -->
+            <div id="downloader-view" class="view active">
+                 <p class="view-description">Paste a YouTube or Spotify link to start.</p>
+                <form id="download-form">
+                    <input type="text" id="url-input" placeholder="https://..." autocomplete="off">
+                    <div id="options-container">
+                        <div id="music-options" class="hidden"></div>
+                        <div id="video-options" class="hidden"></div>
                     </div>
-
-                    <!-- YouTube Video Options (hidden by default) -->
-                    <div id="video-options" class="options-panel hidden">
-                        <div class="option-group">
-                            <label for="video-format">Format</label>
-                            <select id="video-format">
-                                <option value="mp4">MP4</option>
-                                <option value="mkv">MKV</option>
-                                <option value="webm">WebM</option>
-                            </select>
-                        </div>
-                        <div class="option-group">
-                            <label for="resolution">Resolution</label>
-                            <select id="resolution">
-                                <option value="2160">4K (2160p)</option>
-                                <option value="1440">1440p</option>
-                                <option value="1080">1080p (HD)</option>
-                                <option value="720">720p (HD)</option>
-                                <option value="480">480p</option>
-                                <option value="360">360p</option>
-                            </select>
-                        </div>
-                        <div class="option-group toggle-group">
-                            <label for="audio-toggle" class="toggle-label">Include Audio</label>
-                            <label class="switch">
-                                <input type="checkbox" id="audio-toggle" checked>
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" id="download-button">Download</button>
-            </form>
-
-            <div id="status-area">
-                <div id="loader" class="hidden"></div>
-                <p id="status-message"></p>
-                <a href="#" id="download-link" class="hidden"></a>
+                    <button type="submit" id="download-button" class="action-button">
+                        <div class="progress-bar"></div>
+                        <span>Download from Link</span>
+                    </button>
+                </form>
             </div>
+            <!-- Search View -->
+            <div id="search-view" class="view">
+                 <form id="search-form">
+                    <div class="search-bar-wrapper">
+                        <input type="text" id="search-input" placeholder="Search for artists, songs, or videos..." autocomplete="off">
+                        <div class="search-controls">
+                            <div class="search-type-slider">
+                                <span>Song</span>
+                                <label class="switch"><input type="checkbox" id="search-type-toggle"><span class="slider"></span></label>
+                                <span>Video</span>
+                            </div>
+                            <button type="button" id="search-settings-btn" class="icon-btn" title="Search Settings">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19.95 12.35a8 8 0 0 1-1.19 2.48l2.3 1.33a1 1 0 0 1-1 1.73l-2.3-1.33a8 8 0 0 1-11.52 0l-2.3 1.33a1 1 0 0 1-1-1.73l2.3-1.33a8 8 0 0 1-1.19-2.48L2 12l2.35-.35a8 8 0 0 1 1.19-2.48L3.25 7.84a1 1 0 0 1 1-1.73l2.3 1.33a8 8 0 0 1 11.52 0l2.3-1.33a1 1 0 0 1 1 1.73l-2.3 1.33a8 8 0 0 1 1.19 2.48L22 12l-2.05.35zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+                            </button>
+                            <button type="submit" id="search-submit-btn" class="icon-btn" title="Search">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-5.3-3.9a6 6 0 1 0 7.8-7.8 6 6 0 0 0-7.8 7.8zm11.2 1.4a1 1 0 0 1 1.4-1.4l3.1 3.1a1 1 0 0 1-1.4 1.4l-3.1-3.1z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                 </form>
+                 <div id="search-results-container" class="results-grid"></div>
+                 <div id="search-pagination" class="pagination"></div>
+            </div>
+            <!-- Files View -->
+            <div id="files-view" class="view">
+                <div id="file-browser-container" class="results-grid"></div>
+            </div>
+            <div id="status-area"><p id="status-message"></p></div>
         </main>
     </div>
-
+    <!-- Context Menu -->
+    <div id="context-menu" class="hidden">
+        <div class="context-menu-item" id="context-download">Download</div>
+        <div class="context-menu-item" id="context-delete">Delete</div>
+    </div>
+    <!-- Settings Modal -->
+    <div id="settings-overlay" class="hidden">
+        <div id="settings-modal">
+            <h2>Download Settings</h2>
+            <nav class="tabs" id="settings-tabs">
+                <button class="settings-tab-button active" data-view="song-settings-view">Song</button>
+                <button class="settings-tab-button" data-view="video-settings-view">Video</button>
+            </nav>
+            <div id="song-settings-view" class="view active"></div>
+            <div id="video-settings-view" class="view"></div>
+            <button id="settings-close-btn" class="action-button">Save & Close</button>
+        </div>
+    </div>
+    <div class="watermark">by whiteviews</div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
