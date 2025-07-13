@@ -43,7 +43,7 @@ Second:
 
 First:
 ```bash
-pkg install python ffmpeg git
+pkg install python ffmpeg git python-yt-dlp 
 ```
 Second:
 ```bash
